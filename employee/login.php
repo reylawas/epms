@@ -19,11 +19,11 @@ if (isset($_POST['login'])) {
             
             // Check if the logged-in user has the position of Admin
             if ($row['position'] === 'Administrative Officer II') {
-                header('Location: c084kw48cwow40ccoggkkg8k.143.198.91.47.sslip.io/admin/home.php');
+                header('Location: http://localhost/epms/admin/home.php');
             } 
             // Check if the logged-in user has the position of School Head
             else if ($row['position'] === 'School Head') {
-                header('Location: c084kw48cwow40ccoggkkg8k.143.198.91.47.sslip.io/school_head/home.php');
+                header('Location: http://localhost/epms/school_head/home.php');
             } 
             else {
                 header('Location: index.php'); // Redirect non-admin users to the main page
