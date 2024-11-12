@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'employee/includes/conn.php';
+include 'includes/conn.php';
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
