@@ -37,7 +37,7 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url("images/tuyanlogo.jpg");
+    background: url("images/tuyan-logo.jpg");
     background-size: 32%;
     background-position: center;
     background-repeat: no-repeat;
