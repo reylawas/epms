@@ -19,11 +19,11 @@ if (isset($_POST['login'])) {
             
             // Check if the logged-in user has the position of Admin
             if ($row['position'] === 'Administrative Officer II') {
-                header('Location: http://localhost/epms/admin/home.php');
+                header('Location: admin/home.php');
             } 
             // Check if the logged-in user has the position of School Head
             else if ($row['position'] === 'School Head') {
-                header('Location: http://localhost/epms/school_head/home.php');
+                header('Location: school_head/home.php');
             } 
             else {
                 header('Location: index.php'); // Redirect non-admin users to the main page
