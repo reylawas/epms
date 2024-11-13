@@ -22,13 +22,15 @@ if (isset($_POST['login'])) {
             
             // Check if the logged-in user has the position of Admin
             if ($row['position'] === 'Administrative Officer II') {
-                header('Location: admin/home.php');
-                exit();
+                echo "Redirecting to: /admin/home.php";
+header('Location: /admin/home.php');
+exit();
             } 
             // Check if the logged-in user has the position of School Head
             else if ($row['position'] === 'School Head') {
-                header('Location: school_head/home.php');
-                exit();
+                echo "Redirecting to: /school_head/home.php";
+header('Location: /school_head/home.php');
+exit();
             } 
             else {
                 header('Location: index.php'); // Redirect non-admin users to the main page
