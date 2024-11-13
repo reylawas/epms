@@ -22,13 +22,13 @@ if (isset($_POST['login'])) {
             
             // Check if the logged-in user has the position of Admin
             if ($row['position'] === 'Administrative Officer II') {
-                echo "Redirecting to: /admin/home.php";
+                
 header('Location: /admin/home.php');
 exit();
             } 
             // Check if the logged-in user has the position of School Head
             else if ($row['position'] === 'School Head') {
-                echo "Redirecting to: /school_head/home.php";
+                
 header('Location: /school_head/home.php');
 exit();
             } 
@@ -47,7 +47,5 @@ exit();
     $_SESSION['error'] = 'Input employee credentials first';
 }
 
-// If not logged in or failed, redirect back to login page
-header('Location: index.php');
-exit();
+
 ?>
