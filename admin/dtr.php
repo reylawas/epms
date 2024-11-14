@@ -107,7 +107,6 @@
                   <th>Date</th>
                   <th>Time</th>
                   <th>Name</th>
-                  <th>Tools</th>
                 </thead>
                 <tbody>
                 <?php
@@ -183,12 +182,8 @@ foreach ($attendanceRecords as $record) {
       <td class='hidden'></td>
       <td>{$record['type']}</td>
       <td>$dateFormatted</td>
-      <td>" . $timeFormatted . ' ' . $status . "</td>
+      <td>$timeFormatted</td>
       <td>{$record['fullName']}</td>
-      <td>
-          <button class='btn btn-success btn-sm btn-flat edit' data-id='" . $record['attid'] . "'><i class='fa fa-edit'></i> Edit</button>
-          <button class='btn btn-danger btn-sm btn-flat delete' data-id='" . $record['attid'] . "'><i class='fa fa-trash'></i> Delete</button>
-      </td>
   </tr>
   ";
 }
