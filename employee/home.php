@@ -11,8 +11,8 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  	<?php include 'includes/navbar.php'; ?>
-  	<?php include 'includes/menubar.php'; ?>
+    <?php include 'includes/navbar.php'; ?>
+    <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -55,46 +55,123 @@
       <div class="row">
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-green">
+          <div class="small-box bg-blue">
             <div class="inner">
-            <?php
-$userId = $_SESSION['admin']; // Assuming the user ID is stored in the session as 'admin'
-$leaves = getLeavesByUserId($conn, $userId);
+              <?php
+                $sql = "SELECT * FROM employees";
+                $query = $conn->query($sql);
 
-function getLeavesByUserId($conn, $userId) {
-    $sql = "SELECT *, leaves.id AS lid, employees.employee_id AS empid 
-            FROM leaves 
-            LEFT JOIN employees ON employees.id = leaves.employee_id 
-            WHERE employees.id = ? AND leaves.status = 'Approved'
-            ORDER BY date_from, date_to DESC";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $leaves = [];
-    while ($row = $result->fetch_assoc()) {
-        $leaves[] = $row;
-    }
-    $stmt->close();
-    return [$leaves, $result->num_rows]; // Return both leaves and the number of rows
-}
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
 
-list($leaves, $num_rows) = getLeavesByUserId($conn, $userId);
-echo "<h3>" . $num_rows . "</h3>";
-?>
-
-              <p>Total Leaves</p>
+              <p>Pas Slip</p>
             </div>
             <div class="icon">
-            <i class="ion ion-ios-calendar-outline"></i>
+              <i class="ion ion-person-stalker"></i>
             </div>
-            <a href="employee_leave_history.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+        <!-- ./col -->   
+        <!-- Total Leaves box -->
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-green">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM leaves WHERE ('$today' BETWEEN date_from AND date_to) AND status = 'Approved'";
+                $query = $conn->query($sql);
+                echo "<h3>".$query->num_rows."</h3>";
+                
+              ?>
+              <p>Leaves</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-ios-calendar-outline"></i>
+            </div>
+            <a href="employee_leave_request.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 1";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>"
+              ?>
+             
+              <p>On Time</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-clock"></i>
+            </div>
+            <a href="dtr.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 0";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>"
+              ?>
+
+              <p>Late</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-alert-circled"></i>
+            </div>
+            <a href="dtr.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Monthly Attendance Report</h3>
+              <div class="box-tools pull-right">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <label>Select Year: </label>
+                    <select class="form-control input-sm" id="select_year">
+                      <?php
+                        for($i=2015; $i<=2065; $i++){
+                          $selected = ($i==$year)?'selected':'';
+                          echo "
+                            <option value='".$i."' ".$selected.">".$i."</option>
+                          ";
+                        }
+                      ?>
+                    </select>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <br>
+                <div id="legend" class="text-center"></div>
+                <canvas id="barChart" style="height:350px"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       </section>
       <!-- right col -->
     </div>
-  	<?php include 'includes/footer.php'; ?>
+    <?php include 'includes/footer.php'; ?>
 
 </div>
 <!-- ./wrapper -->
@@ -135,29 +212,26 @@ $(function(){
     datasets: [
       {
         label               : 'Late',
-        fillColor           : 'rgba(210, 214, 222, 1)',
-        strokeColor         : 'rgba(210, 214, 222, 1)',
-        pointColor          : 'rgba(210, 214, 222, 1)',
-        pointStrokeColor    : '#c1c7d1',
+        fillColor           : 'rgba(255, 0, 0, 0.9)', // Red
+        strokeColor         : 'rgba(255, 0, 0, 0.8)', // Red
+        pointColor          : '#ff0000', // Red
+        pointStrokeColor    : 'rgba(255, 0, 0, 1)', // Red
         pointHighlightFill  : '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
+        pointHighlightStroke: 'rgba(255, 0, 0, 1)', // Red
         data                : <?php echo $late; ?>
       },
       {
         label               : 'Ontime',
-        fillColor           : 'rgba(60,141,188,0.9)',
-        strokeColor         : 'rgba(60,141,188,0.8)',
-        pointColor          : '#3b8bba',
-        pointStrokeColor    : 'rgba(60,141,188,1)',
+        fillColor           : 'rgba(255, 165, 0, 0.9)', // Orange
+        strokeColor         : 'rgba(255, 165, 0, 0.8)', // Orange
+        pointColor          : '#ffa500', // Orange
+        pointStrokeColor    : 'rgba(255, 165, 0, 1)', // Orange
         pointHighlightFill  : '#fff',
-        pointHighlightStroke: 'rgba(60,141,188,1)',
+        pointHighlightStroke: 'rgba(255, 165, 0, 1)', // Orange
         data                : <?php echo $ontime; ?>
       }
     ]
   }
-  barChartData.datasets[1].fillColor   = '#00a65a'
-  barChartData.datasets[1].strokeColor = '#00a65a'
-  barChartData.datasets[1].pointColor  = '#00a65a'
   var barChartOptions                  = {
     //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
     scaleBeginAtZero        : true,
