@@ -86,7 +86,7 @@
               <p>Leaves</p>
             </div>
             <div class="icon">
-              <i class="ion ion-ios-calendar-outline"></i>
+              <i class="fa fa-user-times"></i>
             </div>
             <a href="employee_leave_request.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
