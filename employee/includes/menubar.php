@@ -22,7 +22,6 @@
         <li class="header">VIEW</li>
         <li><a href="attendance_history.php"><i class="fa fa-calendar"></i> <span>Biologs</span></a></li>
         <li><a href="teaching_load.php"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
-        <li class="header">PRINTABLES</li>
       </ul>
     </section>
     <!-- /.sidebar -->
