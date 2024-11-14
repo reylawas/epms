@@ -67,7 +67,7 @@
               <p>Pas Slip</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-stalker"></i>
+              <i class="fa fa-file-text"></i>
             </div>
             <a href="employee.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
