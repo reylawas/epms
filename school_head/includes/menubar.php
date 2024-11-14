@@ -17,7 +17,6 @@
             <li><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li class="header">MANAGE</li>
             <li><a href="employee.php"><i class="fa fa-users"></i> Employees</a></li>
-            <li><a href="resolution_center.php"><i class="fa fa-cogs"></i> <span>Resolution Center</span></a></li>
             <li><a href="employee_leave_request.php"><i class="fa fa-user-times"></i> Leaves</a></li>
             <li class="header">PRINTABLES</li>
             <li><a href="dtr.php"><i class="fa fa-book"></i> <span>Daily Time Record</span></a></li>
