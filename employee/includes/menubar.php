@@ -17,7 +17,6 @@
         <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class="header">MANAGE</li>
           <li><a href="employee_leave_request.php"><i class="fa fa-user-times"></i> <span>Leave</span></a></li>
-          <li><a href="resolution_center.php"><i class="fa fa-cogs"></i> <span>Resolution Center</span></a></li>
         </li>
         <li class="header">VIEW</li>
         <li><a href="attendance_history.php"><i class="fa fa-calendar"></i> <span>Biologs</span></a></li>
