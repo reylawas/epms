@@ -23,7 +23,6 @@
         <li><a href="attendance_history.php"><i class="fa fa-calendar"></i> <span>Biologs</span></a></li>
         <li><a href="teaching_load.php"><i class="fa fa-clock-o"></i> <span>Schedule</span></a></li>
         <li class="header">PRINTABLES</li>
-            <li><a href="passlip.php"><i class="fa fa-file-text"></i> <span>Pass Slip</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
